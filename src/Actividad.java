@@ -1,16 +1,23 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Actividad {
+public class Actividad  {
 
     private String nombreActividad;
     private String Descripcion;
+    private String nombreEntrega;
+    private int idEntrega;
+    private String carreraEntrega;
     private List<Estudiante> listaEntrega= new ArrayList<>();
 
-    public Actividad(String nombreActividad, String descripcion) {
+    public Actividad(String nombreActividad, String descripcion, String nombreEntrega, int idEntrega, String carreraEntrega) {
         this.nombreActividad = nombreActividad;
         Descripcion = descripcion;
+        this.nombreEntrega = nombreEntrega;
+        this.idEntrega = idEntrega;
+        this.carreraEntrega = carreraEntrega;
     }
+
 
     public String getNombreActividad() {
         return nombreActividad;

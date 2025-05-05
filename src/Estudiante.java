@@ -1,11 +1,11 @@
 import java.util.List;
 
-public class Estudiante {
+public class Estudiante extends Actividad{
     private String nombre;
-    private String id;
+    private int id;
     private String carrera;
 
-    public Estudiante(String nombre, String id, String carrera) {
+    public Estudiante(String nombre, int id, String carrera) {
         this.nombre = nombre;
         this.id = id;
         this.carrera = carrera;
@@ -19,11 +19,11 @@ public class Estudiante {
         this.nombre = nombre;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -35,8 +35,8 @@ public class Estudiante {
         this.carrera = carrera;
     }
 
-    public void agregarActividad(String Titulo  , String Descripcion ){
-
+    public void agregarActividad(String titulo  , String descripcion ){
+        Actividad actividad = new Actividad(titulo,descripcion,nombre,id,carrera);
     }
 
     public void verNotas(){
