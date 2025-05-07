@@ -1,11 +1,12 @@
 import java.util.List;
 
-public class Estudiante extends Actividad{
+public class Estudiante {
     private String nombre;
     private int id;
     private String carrera;
 
     public Estudiante(String nombre, int id, String carrera) {
+
         this.nombre = nombre;
         this.id = id;
         this.carrera = carrera;
@@ -41,5 +42,14 @@ public class Estudiante extends Actividad{
 
     public void verNotas(){
 
+    }
+
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+                "nombre='" + nombre + '\'' +
+                ", id=" + id +
+                ", carrera='" + carrera + '\'' +
+                '}';
     }
 }
