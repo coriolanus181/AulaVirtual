@@ -7,6 +7,7 @@ public class Cursos {
     List<Estudiante> estudiantes = new ArrayList<>();
 
 
+
     public Cursos(String nombreCurso, int nrc) {
         this.nombreCurso = nombreCurso;
         this.nrc = nrc;
@@ -29,6 +30,7 @@ public class Cursos {
     }
 
     public void agregarEstudiante(Estudiante estudiante){
+
         estudiantes.add(estudiante);
     }
 
@@ -47,9 +49,8 @@ public class Cursos {
     @Override
     public String toString() {
         return "Cursos{" +
-                ", nombreCurso='" + nombreCurso +
-                ", nrc=" + nrc +
-                "estudiantes=" + estudiantes +'\'' +
-                '}';
+                "\nNombre del Curso='" + nombreCurso +
+                "\nNRC=" + nrc +
+                "\nEstudiantes=" + estudiantes;
     }
 }
