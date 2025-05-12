@@ -5,7 +5,28 @@ public class Cursos {
     private int nrc;
     private String nombreCurso;
     List<Estudiante> estudiantes = new ArrayList<>();
-    List<Actividad> actividades= new ArrayList<>();
+
+
+    public Cursos(String nombreCurso, int nrc) {
+        this.nombreCurso = nombreCurso;
+        this.nrc = nrc;
+    }
+
+    public String getNombreCurso() {
+        return nombreCurso;
+    }
+
+    public void setNombreCurso(String nombreCurso) {
+        this.nombreCurso = nombreCurso;
+    }
+
+    public int getNrc() {
+        return nrc;
+    }
+
+    public void setNrc(int nrc) {
+        this.nrc = nrc;
+    }
 
     public void agregarEstudiante(Estudiante estudiante){
         estudiantes.add(estudiante);
@@ -21,5 +42,14 @@ public class Cursos {
 
     public void setEstudiantes(List<Estudiante> estudiantes) {
         this.estudiantes = estudiantes;
+    }
+
+    @Override
+    public String toString() {
+        return "Cursos{" +
+                ", nombreCurso='" + nombreCurso +
+                ", nrc=" + nrc +
+                "estudiantes=" + estudiantes +'\'' +
+                '}';
     }
 }

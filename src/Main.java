@@ -10,7 +10,7 @@ public class Main {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
     Scanner teclado = new Scanner(System.in);
-    int opc , opcGE, idE;
+    int opc , opcGE, idE , opcGC;
     String nombreE,carreraE;
     boolean estado= true;
     List<Estudiante> estudiantes = new ArrayList<>();
@@ -32,6 +32,8 @@ public class Main {
             case 1 -> {
                 System.out.println("    1) Registrar Estudiante");
                 System.out.println("    2) Eliminar Estudiante");
+                System.out.println("    3) Mostrar Estudiantes");
+                System.out.println("    4) volver al menu");
                 opcGE = teclado.nextInt();
                 if (opcGE == 1) {
                     teclado.nextLine();
@@ -43,11 +45,15 @@ public class Main {
                     System.out.print("  Ingrese el programa: ");
                     carreraE = teclado.nextLine();
 
-                 estudiantes.add(new Estudiante(nombreE, idE, carreraE));
-
+                    estudiantes.add(new Estudiante(nombreE, idE, carreraE));
 
 
                 } else if (opcGE == 2) {
+                    System.out.println("Ingrese el estudiante que desea eliminar");
+                    int ops = teclado.nextInt();
+                    estudiantes.remove(ops);
+
+                } else if (opcGE == 3) {
                     for (Estudiante c : estudiantes) {
                         System.out.println(c);
 
@@ -57,15 +63,55 @@ public class Main {
             }
 
             case 2 -> {
+                /*
                 for (Estudiante c : estudiantes) {
                     System.out.println(c);
+                }*/
+                System.out.println("1. Agregar cursos");
+                System.out.println("2. Mostrar Cursos");
+                opcGC = teclado.nextInt();
+                if (opcGC==1){
+                    teclado.nextLine();
+                    System.out.print("Ingrese el nombre del curso");
+                    String nombreC= teclado.nextLine();
+                    System.out.print("Ingrese el nrc del curso");
+                    int nrc = teclado.nextInt();
+                    cursos.add(new Cursos(nombreC,nrc));
+                } else if (opcGC==2){
+                    System.out.println("Cursos");
+                    for(Cursos c: cursos){
+                        System.out.println(c);
+                    }
+
+                    System.out.println("1. Agregar estudiante al curso");
+                    System.out.println("2 Eliminar estudiante del curso");
+                    int opcAE = teclado.nextInt();
+                    if(opcAE==1){
+                        System.out.println("Ingrese el Id del estudiante");
+                        int idAE= teclado.nextInt();
+                        System.out.println("Escriba el nrc del curso que desea agregarlo");
+                        int cursoAE = teclado.nextInt();
+                        for (Estudiante e: estudiantes){
+                            if (idAE== e.getId()){
+                                for (Cursos c: cursos){
+                                    if (cursoAE== c.getNrc()){
+                                        c.agregarEstudiante(e);
+                                        break;
+                                    }
+                                }
+
+                            }
+                        }
+                    }else if(opcAE==2){
+
+                    }
                 }
+
+
+
 
             }
             case 3 -> {
-                System.out.println("Ingrese el estudiante que dese eliminar");
-                int ops = teclado.nextInt();
-                estudiantes.remove(ops);
             }
 
             case 7 -> estado=false;
