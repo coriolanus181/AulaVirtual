@@ -18,10 +18,14 @@ public class Main {
     List<Estudiante> estudiantes = new ArrayList<>();
     List<Cursos> cursos= new ArrayList<>();
 
+
     cursos.add(new Cursos("Ingles",111));
     cursos.add(new Cursos("Español",123));
     estudiantes.add(new Estudiante("Winder",968,"Sistemas"));
     estudiantes.add(new Estudiante("Joan",971,"Sistemas"));
+
+    cursos.get(0).estudiantes.add(estudiantes.get(0));
+    cursos.get(0).estudiantes.add(estudiantes.get(1));
 
     System.out.println("    Bienvenido(a) a Virtual WinKan\n");
 
@@ -64,9 +68,24 @@ public class Main {
 
                     } else if (opcGE == 2) {
                         System.out.println("    - - - Eliminar Estudiantes - - -");
-                        System.out.println("    Ingrese el estudiante que desea eliminar: ");
+                        System.out.print("    Ingrese el  ID del estudiante que desea eliminar: ");
                         int ops = teclado.nextInt();
-                        estudiantes.remove(ops);
+                        boolean verificarE= false;
+                        int indiceE =-1;
+                        for (Estudiante e: estudiantes){
+                            if (e.getId()==ops){
+                                verificarE= true;
+
+                              indiceE=  estudiantes.indexOf(e);
+                            }
+                        }
+
+                        if(verificarE==true){
+                            estudiantes.remove(indiceE);
+                            System.out.println("     X X X | El estudiante ha sido eliminado correctamente | X X X ");
+                        }else{
+                            System.out.println("    * * * * *| No existe el estudiante a eliminar | * * * * * ");
+                        }
 
                     } else if (opcGE == 3) {
                         for (Estudiante c : estudiantes) {
@@ -87,7 +106,9 @@ public class Main {
                     System.out.println("    + + + GESTIÓN DE CURSOS + + +");
                     System.out.println("    1) Agregar cursos.");
                     System.out.println("    2) Mostrar Cursos.");
-                    System.out.println("    3) Volver al Menú.");
+                    System.out.println("    3) Eliminar Cursos.");
+                    System.out.println("    4) Administrar estudiantes");
+                    System.out.println("    5) Volver al Menú.");
                     System.out.print("    Dígite la opción que desea elegir: ");
                     opcGC = teclado.nextInt();
                     if (opcGC == 1) {
@@ -102,15 +123,40 @@ public class Main {
                         System.out.println("Cursos");
                         for (Cursos c : cursos) {
                             System.out.println(c);
+                            c.mostrarEstudiantes();
+
+                        }
+                    } else if (opcGC == 3) {
+                        System.out.println("----------- Eliminar Cursos -----------");
+                        System.out.println("    Ingrese el NRC del curso");
+                        int nrc= teclado.nextInt();
+                        boolean verficarC= false;
+                        int indiceC=-1;
+                        for( Cursos c: cursos){
+                            if(c.getNrc()==nrc){
+                                verficarC = true;
+                                indiceC= cursos.indexOf(c);
+                            }
                         }
 
+                        if( verficarC== true){
+                            cursos.remove(indiceC);
+                            System.out.println("    X X X |El curso ha sido eliminado | X X X   ");
+
+                        }else{
+                            System.out.println("    * * * * |No se ha encontrado ningun curso con ese NRC | * * * *     ");
+                        }
+
+
+                    }else if (opcGC == 4) {
                         System.out.println("    1) Agregar estudiante al curso");
                         System.out.println("    2) Eliminar estudiante del curso");
+
                         int opcAE = teclado.nextInt();
                         if (opcAE == 1) {
                             System.out.println("    Ingrese el Id del estudiante: ");
                             int idAE = teclado.nextInt();
-                            System.out.println("    Escriba el nrc del curso que desea agregarlo: ");
+                            System.out.println("    Escriba el NRC del curso que desea agregarlo: ");
                             int cursoAE = teclado.nextInt();
                             for (Estudiante e : estudiantes) {
                                 if (idAE == e.getId()) {
@@ -123,17 +169,47 @@ public class Main {
 
                                 }
                             }
-                        } else if (opcAE == 2) {
-                            System.out.println("----------- Eliminar Cursos -----------");
+                         }else if(opcAE==2){
+                            System.out.println("    Ingrese el Id del estudiante: ");
+                            int idAE = teclado.nextInt();
+                            System.out.println("    Escriba el NRC del curso que desea agregarlo: ");
+                            int cursoAE = teclado.nextInt();
+                            Boolean verificarCurso= false;
+                            int indiceCurso=-1;
+                            for (Cursos e : cursos) {
+                                if (cursoAE == e.getNrc()) {
+                                    verificarCurso= true;
+                                    indiceCurso = cursos.indexOf(e);
+                                    }
+                            }
+                            boolean verificarEstudiantes= false;
+                            int indiceEstudiante=-1;
+                            if(verificarCurso== true){
+                                for(Estudiante e: cursos.get(indiceCurso).getEstudiantes()){
+                                    if(idAE==e.getId()) {
+                                        verificarEstudiantes = true;
+                                        indiceEstudiante = cursos.get(indiceCurso).getEstudiantes().indexOf(e);
+                                    }
+                                }
+                                if (verificarEstudiantes==true){
+                                    cursos.get(indiceCurso).getEstudiantes().remove(indiceEstudiante);
+                                    System.out.println("    X X X | Estudiante eliminado exitosamente | X X X ");
+                                }else{
+                                    System.out.println("    * * * * | El estudiante no se encuentra | * * * * ");
+                                }
+                            } else {
+                                System.out.println("    * * * * | El curso no se encuentra | * * * * ");
+                            }
 
-                        }else if((opcAE == 3)){
-                            estadoC2=false;
                         }
 
-                        else {
+                        } else if (opcGC == 5) {
+                            estadoC2=false;
+
+                        } else {
                             System.out.println("    * * * * *| Dígite una opción válida |* * * * *");
                         }
-                    }
+
 
 
                 }while(estadoC2);

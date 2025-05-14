@@ -46,11 +46,22 @@ public class Cursos {
         this.estudiantes = estudiantes;
     }
 
+    public void mostrarEstudiantes(){
+
+
+        if(estudiantes.size()==0){
+            System.out.println("No hay estudiantes");
+        }else {
+            for(int i=0; i<estudiantes.size();i++){
+                System.out.println("\n"
+                        +(i+1)+") "+ estudiantes.get(i).getId()+" "+estudiantes.get(i).getNombre());
+            }
+        }
+    }
     @Override
     public String toString() {
-        return "Cursos{" +
-                "\nNombre del Curso='" + nombreCurso +
-                "\nNRC=" + nrc +
-                "\nEstudiantes=" + estudiantes;
+        return "\nNombre del Curso: " + nombreCurso +
+                "\nNRC: " + nrc +
+                "\nEstudiantes: " ;
     }
 }
