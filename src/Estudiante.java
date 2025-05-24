@@ -40,8 +40,22 @@ public class Estudiante {
         Actividad actividad = new Actividad(titulo,descripcion,nombre,id,carrera);
     }
 
-    public void verNotas(){
+    public void verNotas(){}
 
+    public void getCurso( List<Cursos> curso){
+        boolean verficar= false;
+        for(Cursos nrc: curso ){
+            for(Estudiante alumno : nrc.getEstudiantes()){
+                if(id== alumno.getId()){
+                    verficar = true;
+                    System.out.println("        * "+nrc.getNombreCurso());
+                }
+            }
+
+        }
+        if( verficar== false){
+            System.out.println("No hay cursos");
+        }
     }
 
     @Override

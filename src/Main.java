@@ -161,26 +161,44 @@ public class Main {
                                 System.out.println("    - - - Agregar Estudiante al Curso - - -");
                                 System.out.print("    Ingrese el ID del estudiante: ");
                                 int idAE = teclado.nextInt();
+                                boolean verificarEstudiante= false;
+                                int indiceEstudiante = -1;
+                                for(Estudiante alumno: estudiantes){
+                                    if (alumno.getId() == idAE) {
+                                        verificarEstudiante = true;
+                                        indiceEstudiante= estudiantes.indexOf(alumno);
 
-                                for (Estudiante e : estudiantes) {
-                                    if (idAE == e.getId()) {
-
-                                        for (Cursos c : cursos) {
-                                            System.out.print("    Escriba el NRC del curso al que desea agregarlo: ");
-                                            int cursoAE = teclado.nextInt();
-                                            if (cursoAE == c.getNrc()) {
-                                                c.agregarEstudiante(e);
-
-                                            } else {
-                                                System.out.println("    * * * * | El curso no ha sido encontrado, dígite un NRC válido | * * * *");
-                                            }
-                                        }
-
-                                    } else {
-                                        System.out.println("    * * * * | El estudiante no ha sido encontrado, dígite un ID válido | * * * *");
-                                        break;
                                     }
                                 }
+
+                                if(verificarEstudiante== true){
+                                    System.out.print("    Escriba el NRC del curso al que desea agregarlo: ");
+                                    int cursoAE = teclado.nextInt();
+                                    boolean verficarNRC = false;
+                                    int indiceCurso = -1;
+
+                                    for(Cursos nrc: cursos){
+                                        if(nrc.getNrc()== cursoAE){
+                                            verficarNRC = true;
+                                            indiceCurso = cursos.indexOf(nrc);
+                                        }
+                                    }
+
+                                    if(verficarNRC==true){
+                                        cursos.get(indiceCurso).agregarEstudiante(estudiantes.get(indiceEstudiante));
+                                        System.out.println("    X X X | El estudiante ha sido agregado exitosamente | X X X ");
+                                    }else{
+                                        System.out.println("    * * * * | El curso no ha sido encontrado, dígite un NRC válido | * * * *");
+                                    }
+
+                                }else{
+                                    System.out.println("    * * * * | El estudiante no ha sido encontrado, dígite un ID válido | * * * *");
+                                }
+
+
+
+
+
                             } else if (opcAE == 2) {
                                 System.out.println("    - - - Eliminar Estudiante del Curso - - -");
                                 System.out.print("    Ingrese el ID del estudiante: ");
@@ -233,33 +251,28 @@ public class Main {
 
             }
             case 3 -> {
-               /* System.out.println("    + + + BUSCAR ESTUDIANTES + + +");
-                System.out.println("    Ingrese el ID del estudiante ");
-                int id = teclado.nextInt();
-                int indiceEstudiante = -1;
-                boolean verificarEstudiantes = false;
-                int indiceCurso = -1;
-                for (Estudiante e : cursos.get(indiceCurso).getEstudiantes()) {
-                    if (id == e.getId()) {
-                        verificarEstudiantes = true;
-                        indiceEstudiante = cursos.get(indiceCurso).getEstudiantes().indexOf(e);
+
+                System.out.println("Ingrese el Id del estudiante");
+                int id  = teclado.nextInt();
+                boolean verificarEstudiante = false;
+
+                for(Estudiante alumno: estudiantes){
+                    if (alumno.getId() == id) {
+                        verificarEstudiante = true;
+                        System.out.println("Nombre: "+alumno.getNombre());
+                        System.out.println("ID: "+alumno.getId());
+                        System.out.println("Curso: ");
+                        alumno.getCurso(cursos);
+                        System.out.println("Programa: "+alumno.getCarrera());
                     }
                 }
-                if (verificarEstudiantes == true) {
-                    cursos.get(indiceCurso).getEstudiantes().get(indiceEstudiante);
-                    System.out.println(estudiantes.get(indiceEstudiante));
-                    System.out.println("    X X X | Estudiante se ha encontrado exitosamente | X X X ");
-                } else {
+                if(verificarEstudiante==false){
                     System.out.println("    * * * * | El estudiante no se encuentra | * * * * ");
-
-                }*/
+                }
 
             }
 
             case 4 ->{
-              /*  System.out.println("Registrar nota");
-                System.out.println("ingrese el nombre de la actividad");
-                String actividad = teclado.nextLine();*/
 
             }
 
