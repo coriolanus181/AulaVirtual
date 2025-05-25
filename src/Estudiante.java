@@ -36,9 +36,6 @@ public class Estudiante {
         this.carrera = carrera;
     }
 
-    public void agregarActividad(String titulo  , String descripcion ){
-        Actividad actividad = new Actividad(titulo,descripcion,nombre,id,carrera);
-    }
 
     public void verNotas(){}
 

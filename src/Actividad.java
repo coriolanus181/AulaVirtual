@@ -2,22 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Actividad  {
-
     private String nombreActividad;
-    private String Descripcion;
-    private String nombreEntrega;
-    private int idEntrega;
-    private String carreraEntrega;
-    private List<Estudiante> listaEntrega= new ArrayList<>();
+    private Double porcentaje;
+    private String  criterio;
 
-    public Actividad(String nombreActividad, String descripcion, String nombreEntrega, int idEntrega, String carreraEntrega) {
+    public Actividad(String nombreActividad, Double porcentaje, String criterio) {
         this.nombreActividad = nombreActividad;
-        Descripcion = descripcion;
-        this.nombreEntrega = nombreEntrega;
-        this.idEntrega = idEntrega;
-        this.carreraEntrega = carreraEntrega;
-    }
 
+        this.porcentaje = porcentaje;
+        this.criterio = criterio;
+    }
 
     public String getNombreActividad() {
         return nombreActividad;
@@ -27,19 +21,20 @@ public class Actividad  {
         this.nombreActividad = nombreActividad;
     }
 
-    public String getDescripcion() {
-        return Descripcion;
+
+    public Double getPorcentaje() {
+        return porcentaje;
     }
 
-    public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+    public void setPorcentaje(Double porcentaje) {
+        this.porcentaje = porcentaje;
     }
 
-    public List<Estudiante> getListaEntrega() {
-        return listaEntrega;
+    public String getCriterio() {
+        return criterio;
     }
 
-    public void setListaEntrega(List<Estudiante> listaEntrega) {
-        this.listaEntrega = listaEntrega;
+    public void setCriterio(String criterio) {
+        this.criterio = criterio;
     }
 }
