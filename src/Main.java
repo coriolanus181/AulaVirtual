@@ -10,7 +10,7 @@ public class Main {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
     Scanner teclado = new Scanner(System.in);
-    int opc , opcGE, idE , opcGC;
+    int opc , opcGE, idE , opcGC , nrcG;
     String nombreE,carreraE,jornadaD;
     boolean estado= true;
     boolean estadoC1= true;
@@ -19,6 +19,7 @@ public class Main {
     List<Estudiante> estudiantes = new ArrayList<>();
     List<Docente> docentes = new ArrayList<>();
     List<Cursos> cursos= new ArrayList<>();
+    List<Actividad> actividades = new ArrayList<>();
 
 
     cursos.add(new Cursos("Ingles",111));
@@ -421,7 +422,54 @@ public class Main {
                 do{
                 System.out.println("\n    + + + GESTIÓN DE NOTAS + + +");
 
-                System.out.println("    1) Registrar nota  .");
+                System.out.println("    Ingrese el NRC del curso .");
+                nrcG = teclado.nextInt();
+                boolean verificarCurso = false;
+                for(Cursos curso: cursos){
+                    if (curso.getNrc() == nrcG) {
+                        verificarCurso = true;
+                    }
+                }
+                    if (verificarCurso == true) {
+                        System.out.println("    1) Crear Actividad");
+                        System.out.println("    2) Registrar notas");
+                        System.out.println("    3) Ver notas .");
+                        System.out.println("    4) Volver al menú.");
+                        int select= teclado.nextInt();
+                        switch (select){
+                            case 1 -> {
+                                System.out.println("    Ingrese el nombre de la actividad ");
+                                String actividad =teclado.nextLine();
+                                System.out.println("    Ingrese el porcentaje de la actividad");
+                                double porcentaje = teclado.nextDouble();
+
+
+                                actividades.add(new Actividad(actividad,porcentaje));
+                                System.out.println("Elija el criterio de evaluacion :" +
+                                        "\n      1) Talleres / Tareas -> 20% " +
+                                        "\n      2) Quizzes -> 30%" +
+                                        "\n      3) Parcial -> 50%");
+                                int criterio= teclado.nextInt();
+                                for (Actividad a: actividades ){
+                                    a.setCriterio(criterio);
+                                }
+
+                            }
+
+                            case 2 -> {
+                                System.out.println("    Ingrese el Id del estudiante");
+                                int id= teclado.nextInt();
+                                boolean  verificarEstudiante;
+                                for(Estudiante e: estudiantes){
+
+                                }
+                            }
+                        }
+
+                    }else{
+                        System.out.println("    * * * * | El curso no se encuentra | * * * * ");
+                    }
+                /*
                 System.out.println("    2) Ver notas .");
                 System.out.println("    3) Volver al Menú.");
                 System.out.print("    Dígite la opción que desea elegir: ");
@@ -468,7 +516,7 @@ public class Main {
                     } else {
                         System.out.println("    * * * * | El curso no se encuentra | * * * * ");
                     }
-                }
+                }*/
                 }while(estadoGestion);
 
             }
