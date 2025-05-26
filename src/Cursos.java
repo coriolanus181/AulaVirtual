@@ -71,7 +71,7 @@ public class Cursos {
             }
         }
         if(verificarPresencia==true){
-            System.out.println(" * * * * *| El estudiante ya esta inscrito a este curso | * * * * * ");
+            System.out.println("     * * * * *| El estudiante ya esta inscrito a este curso | * * * * * ");
         }else{
             estudiantes.add(estudiante);
             System.out.println("    X X X | El estudiante ha sido agregado exitosamente | X X X ");
@@ -95,9 +95,9 @@ public class Cursos {
     public void mostrarEstudiantes(){
 
         if(estudiantes.size()==0){
-            System.out.print("No hay estudiantes");
+            System.out.print("  No hay estudiantes");
         }else {
-            System.out.println("Estudiantes :");
+            System.out.println("    Estudiantes :");
             for(int i=0; i<estudiantes.size();i++){
                 System.out.print("\n    "
                         +(i+1)+") "+ estudiantes.get(i).getId()+" - "+estudiantes.get(i).getNombre());
@@ -115,7 +115,7 @@ public class Cursos {
         if(profesor!=null) {
             System.out.println(profesor.getNombre());
         }else{
-            System.out.println("No hay profesor ");
+            System.out.println("    No hay un docente asignado. ");
         }
     }
     public void asignarDocente(Docente docente) {

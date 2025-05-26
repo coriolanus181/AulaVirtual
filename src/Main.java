@@ -30,9 +30,9 @@ public class Main {
     cursos.get(0).getEstudiantes().add(estudiantes.get(0));
     cursos.get(0).getEstudiantes().add(estudiantes.get(1));
     cursos.get(0).asignarDocente(docentes.get(0));
-    cursos.get(0).agregarActividad("vocabulario",1);
+    cursos.get(0).agregarActividad(" Vocabulario",1);
 
-    System.out.println("\n    Bienvenido(a) a Virtual WinKan\n");
+    System.out.println("    Bienvenido(a) a Virtual WinKan\n");
 
     do {
         System.out.print("""
@@ -405,18 +405,18 @@ public class Main {
             }
             case 4 -> {
 
-                System.out.println("Ingrese el Id del estudiante");
+                System.out.println("    Ingrese el Id del estudiante: ");
                 int id  = teclado.nextInt();
                 boolean verificarEstudiante = false;
 
                 for(Estudiante alumno: estudiantes){
                     if (alumno.getId() == id) {
                         verificarEstudiante = true;
-                        System.out.println("Nombre: "+alumno.getNombre());
-                        System.out.println("ID: "+alumno.getId());
-                        System.out.println("Curso: ");
+                        System.out.println("    Nombre: "+alumno.getNombre());
+                        System.out.println("    ID: "+alumno.getId());
+                        System.out.println("    Curso: ");
                         alumno.getCurso(cursos);
-                        System.out.println("Programa: "+alumno.getCarrera());
+                        System.out.println("    Programa: "+alumno.getCarrera());
                     }
                 }
                 if(verificarEstudiante==false){
@@ -473,18 +473,18 @@ public class Main {
 
                                 case 2 -> {
                                     teclado.nextLine();
-                                    System.out.print("\n    - - - Registrar notas- - -");
-                                    System.out.print("\n    elija la actividad a calificar :");
+                                    System.out.print("\n    - - - Registrar notas - - -");
+                                    System.out.print("\n    Elija la actividad a calificar: ");
                                     int i = 1;
                                     for (Actividad act : cursos.get(indiceCurso).getActividades()) {
                                         System.out.print("\n        "+i + ")" + act.getNombreActividad());
                                         i++;
                                     }
-                                    System.out.print("\n    ingrese una opcion: ");
+                                    System.out.print("\n    Ingrese una opcion: ");
                                     int indiceActividad = teclado.nextInt();
                                     indiceActividad=indiceActividad-1;
 
-                                    System.out.print("\n    ingrese el ID del estudiante a calificar  :");
+                                    System.out.print("\n    Ingrese el ID del estudiante a calificar : ");
                                     int id = teclado.nextInt();
                                     boolean verificarEstudiante = false;
                                     int indiceEstudiante = -1;
@@ -497,7 +497,7 @@ public class Main {
                                     if (verificarEstudiante == false) {
                                         System.out.println("    * * * * | El estudiante no se encuentra | * * * * ");
                                     } else {
-                                        System.out.println("ingrese la calificacion entre el 0 y el 5 : ");
+                                        System.out.print("    Ingrese la calificacion entre el 0 y el 5: ");
                                         double nota = teclado.nextDouble();
                                         if (nota >= 0 && nota <= 5) {
                                             cursos.get(indiceCurso).registrarNotaEstudiante(indiceEstudiante, indiceActividad, nota);

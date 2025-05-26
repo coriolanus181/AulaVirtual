@@ -61,13 +61,13 @@ public class Estudiante {
 
         }
         if( verficar== false){
-            System.out.println("No hay cursos");
+            System.out.println("    No hay cursos");
         }
     }
 
     @Override
     public String toString() {
-        return "    - - - - - - - - - - - - - - - \n    Estudiante: " +
+        return "    - - - - - - - - - - - - - - - \n        Estudiante: " +
                 "\n    Nombre: " + nombre +
                 "\n    ID: " + id +
                 "\n    Carrera: " + carrera;
@@ -88,19 +88,19 @@ public class Estudiante {
 
             if(actividad.getCriterio() == 1){
                 notat+=actividad.getNota();
-                pt=actividad.getCriterio();
-                System.out.println(pt);
+                pt=actividad.getPt();
+
             } else if( actividad.getCriterio() == 2){
                 notaq+=actividad.getNota();
-                pq=actividad.getCriterio();
-                System.out.println(pq);
+                pq=actividad.getPq();
+
             } else if ( actividad.getCriterio() == 3){
                 notap+=actividad.getNota();
-                pp=actividad.getCriterio();
-                System.out.println(pp);
+                pp=actividad.getPp();
+
             }
         }
-        definitiva=(notat*pt)+(notaq*pq)+(notap*pp);
+        definitiva=(notat*(pt/100))+(notaq*(pq/100))+(notap*(pp/100));
             return definitiva;
         }
 

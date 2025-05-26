@@ -20,6 +20,30 @@ public class Actividad  {
 
     }
 
+    public double getPt() {
+        return pt;
+    }
+
+    public void setPt(double pt) {
+        this.pt = pt;
+    }
+
+    public double getPq() {
+        return pq;
+    }
+
+    public void setPq(double pq) {
+        this.pq = pq;
+    }
+
+    public double getPp() {
+        return pp;
+    }
+
+    public void setPp(double pp) {
+        this.pp = pp;
+    }
+
     public double getNota() {
         return nota;
     }
