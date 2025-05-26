@@ -4,13 +4,47 @@ import java.util.List;
 public class Cursos {
     private int nrc;
     private String nombreCurso;
-    List<Estudiante> estudiantes = new ArrayList<>();
+    private List<Estudiante> estudiantes = new ArrayList<>();
     private Docente profesor=null;
+    private double porcentajeTrabajos=0;
+    private double porcentajeQuizzes=0;
+    private double porcentajeParcial=0;
+    private List<Actividad> actividades = new ArrayList<>();
 
-
-    public Cursos(String nombreCurso, int nrc) {
-        this.nombreCurso = nombreCurso;
+    public Cursos(int nrc, String nombreCurso, double porcentajeTrabajos, double porcentajeQuizzes, double porcentajeParcial) {
         this.nrc = nrc;
+        this.nombreCurso = nombreCurso;
+        this.porcentajeTrabajos = porcentajeTrabajos;
+        this.porcentajeQuizzes = porcentajeQuizzes;
+        this.porcentajeParcial = porcentajeParcial;
+    }
+
+    public List<Actividad> getActividades() {
+        return actividades;
+    }
+
+    public double getPorcentajeTrabajos() {
+        return porcentajeTrabajos;
+    }
+
+    public void setPorcentajeTrabajos(double porcentajeTrabajos) {
+        this.porcentajeTrabajos = porcentajeTrabajos;
+    }
+
+    public double getPorcentajeQuizzes() {
+        return porcentajeQuizzes;
+    }
+
+    public void setPorcentajeQuizzes(double porcentajeQuizzes) {
+        this.porcentajeQuizzes = porcentajeQuizzes;
+    }
+
+    public double getPorcentajeParcial() {
+        return porcentajeParcial;
+    }
+
+    public void setPorcentajeParcial(double porcentajeParcial) {
+        this.porcentajeParcial = porcentajeParcial;
     }
 
     public String getNombreCurso() {
@@ -87,7 +121,7 @@ public class Cursos {
     public void asignarDocente(Docente docente) {
         if (profesor == null) {
             profesor = docente;
-            System.out.println("    X X X | El docente ha sido asignado exitosamente  | X X X ");
+
         } else {
             System.out.println("    * * * * *| El curso ya tiene un docente asignado  |* * * * *");
         }
@@ -100,4 +134,15 @@ public class Cursos {
             System.out.println("    X X X | El docente ha sido eliminado del curso  | X X X ");
         }
     }
+    public void agregarActividad(String nombre ,int  criterio){
+        actividades.add(new Actividad(nombre,criterio,porcentajeTrabajos,porcentajeQuizzes,porcentajeParcial));
+        for (Estudiante e : estudiantes){
+            e.agregarActividad(nombre,criterio,porcentajeTrabajos,porcentajeQuizzes,porcentajeParcial);
+        }
+    }
+    public void registrarNotaEstudiante(int id ,int actividad,double calificacion){
+
+            estudiantes.get(id).getActividades().get(actividad).setNota(calificacion);
+
+}
 }

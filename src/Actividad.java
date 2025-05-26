@@ -3,14 +3,29 @@ import java.util.List;
 
 public class Actividad  {
     private String nombreActividad;
-    private double porcentaje;
-    private double  criterio;
 
-    public Actividad(String nombreActividad, double porcentaje) {
+    private int  criterio;
+    private double pt=0;
+    private double pq=0;
+    private double pp=0;
+    private double nota=0 ;
+
+    public Actividad(String nombreActividad , int criterio, double pt, double pq, double pp) {
         this.nombreActividad = nombreActividad;
 
-        this.porcentaje = porcentaje;
+        this.criterio = criterio;
+        this.pt = pt;
+        this.pq = pq;
+        this.pp = pp;
 
+    }
+
+    public double getNota() {
+        return nota;
+    }
+
+    public void setNota(double nota) {
+        this.nota = nota;
     }
 
     public String getNombreActividad() {
@@ -22,36 +37,13 @@ public class Actividad  {
     }
 
 
-    public Double getPorcentaje() {
-        return porcentaje;
-    }
-
-
-
     public double getCriterio() {
         return criterio;
     }
 
-    public void setCriterio(double criterio) {
+    public void setCriterio(int criterio) {
         this.criterio = criterio;
     }
 
-    public void setporcentaje(int porcentaje, int criterio){
-        if(criterio == 1){
-            this.porcentaje= (porcentaje*20)/100;
-        } else if( criterio == 2){
-            this.porcentaje =(porcentaje*30)/100;
-        } else if ( criterio == 3){
-            this.porcentaje  =(porcentaje*50)/100;
-        }
-    }
 
-    @Override
-    public String toString() {
-        return "Actividad{" +
-                "criterio=" + criterio +
-                ", nombreActividad='" + nombreActividad + '\'' +
-                ", porcentaje=" + porcentaje +
-                '}';
-    }
 }

@@ -19,16 +19,18 @@ public class Main {
     List<Estudiante> estudiantes = new ArrayList<>();
     List<Docente> docentes = new ArrayList<>();
     List<Cursos> cursos= new ArrayList<>();
-    List<Actividad> actividades = new ArrayList<>();
 
 
-    cursos.add(new Cursos("Ingles",111));
-    cursos.add(new Cursos("Español",123));
+
+    cursos.add(new Cursos(111,"Ingles",40,30,30));
+    cursos.add(new Cursos(123,"Español",25,25,50));
     estudiantes.add(new Estudiante("Winder",968,"Sistemas"));
     estudiantes.add(new Estudiante("Joan",971,"Sistemas"));
-
-    cursos.get(0).estudiantes.add(estudiantes.get(0));
-    cursos.get(0).estudiantes.add(estudiantes.get(1));
+    docentes.add(new Docente(999,"William Matallana","Manana"));
+    cursos.get(0).getEstudiantes().add(estudiantes.get(0));
+    cursos.get(0).getEstudiantes().add(estudiantes.get(1));
+    cursos.get(0).asignarDocente(docentes.get(0));
+    cursos.get(0).agregarActividad("vocabulario",1);
 
     System.out.println("\n    Bienvenido(a) a Virtual WinKan\n");
 
@@ -186,7 +188,13 @@ public class Main {
                         String nombreC = teclado.nextLine();
                         System.out.print("    Ingrese el nrc del curso: ");
                         int nrc = teclado.nextInt();
-                        cursos.add(new Cursos(nombreC, nrc));
+                        System.out.print("    Ingrese el porcentaje de trabajos del curso: ");
+                        double pt = teclado.nextInt();
+                        System.out.print("    Ingrese el porcentaje de los Quizzes del curso: ");
+                        double pq = teclado.nextInt();
+                        System.out.print("    Ingrese el porcentaje del parcial curso: ");
+                        double pp = teclado.nextInt();
+                        cursos.add(new Cursos(nrc,nombreC,pt,pq,pp));
 
                     } else if (opcGC == 2) {
                         System.out.print("    - - - Cursos - - -");
@@ -344,7 +352,7 @@ public class Main {
 
                                     if(verficarNRC==true){
                                         cursos.get(indiceCurso).asignarDocente(docentes.get(indiceDocente));
-
+                                        System.out.println("    X X X | El docente ha sido asignado exitosamente  | X X X ");
                                     }else{
                                         System.out.println("    * * * * | El curso no ha sido encontrado, dígite un NRC válido | * * * *");
                                     }
@@ -418,106 +426,121 @@ public class Main {
             }
 
             case 5 ->{
-                boolean estadoGestion=true;
-                do{
-                System.out.println("\n    + + + GESTIÓN DE NOTAS + + +");
 
-                System.out.println("    Ingrese el NRC del curso .");
+                boolean estadoGestion=true;
+
+                System.out.println("    + + + GESTIÓN DE NOTAS + + +");
+
+                System.out.print("    Ingrese el NRC del curso al que va gestionar notas :");
                 nrcG = teclado.nextInt();
                 boolean verificarCurso = false;
-                for(Cursos curso: cursos){
-                    if (curso.getNrc() == nrcG) {
-                        verificarCurso = true;
-                    }
-                }
-                    if (verificarCurso == true) {
-                        System.out.println("    1) Crear Actividad");
-                        System.out.println("    2) Registrar notas");
-                        System.out.println("    3) Ver notas .");
-                        System.out.println("    4) Volver al menú.");
-                        int select= teclado.nextInt();
-                        switch (select){
-                            case 1 -> {
-                                System.out.println("    Ingrese el nombre de la actividad ");
-                                String actividad =teclado.nextLine();
-                                System.out.println("    Ingrese el porcentaje de la actividad");
-                                double porcentaje = teclado.nextDouble();
-
-
-                                actividades.add(new Actividad(actividad,porcentaje));
-                                System.out.println("Elija el criterio de evaluacion :" +
-                                        "\n      1) Talleres / Tareas -> 20% " +
-                                        "\n      2) Quizzes -> 30%" +
-                                        "\n      3) Parcial -> 50%");
-                                int criterio= teclado.nextInt();
-                                for (Actividad a: actividades ){
-                                    a.setCriterio(criterio);
-                                }
-
-                            }
-
-                            case 2 -> {
-                                System.out.println("    Ingrese el Id del estudiante");
-                                int id= teclado.nextInt();
-                                boolean  verificarEstudiante;
-                                for(Estudiante e: estudiantes){
-
-                                }
-                            }
+                int indiceCurso=-1;
+                    for(Cursos curso: cursos){
+                        if (curso.getNrc() == nrcG) {
+                            verificarCurso = true;
+                            indiceCurso= cursos.indexOf(curso);
                         }
+                    }
+                    if (verificarCurso == true) {
+                        do {
+                            System.out.println("\n    - - - Administrar notas del curso- - -");
+                            System.out.println("    1) Crear Actividad");
+                            System.out.println("    2) Registrar notas");
+                            System.out.println("    3) Ver notas .");
+                            System.out.println("    4) Volver al menú.");
+                            System.out.print("    Digite una opcion : ");
+                            int select = teclado.nextInt();
+                            switch (select) {
+                                case 1 -> {
+                                    teclado.nextLine();
+                                    System.out.println("    - - - Crear actividad- - -");
+                                    System.out.print("    Ingrese el nombre de la actividad :");
+                                    String actividad = teclado.nextLine();
 
+                                    System.out.print("\n    Elija el criterio de evaluacion : " +
+                                            "\n      1) Talleres / Tareas ->  " + cursos.get(indiceCurso).getPorcentajeTrabajos() + "%" +
+                                            "\n      2) Quizzes -> " + cursos.get(indiceCurso).getPorcentajeQuizzes() + "%" +
+                                            "\n      3) Parcial -> " + cursos.get(indiceCurso).getPorcentajeParcial() + "%");
+                                    System.out.print("\n   Digite una opcion : ");
+                                    int criterio = teclado.nextInt();
+                                    cursos.get(indiceCurso).agregarActividad(actividad, criterio);
+                                    System.out.println("    X X X | La actividad ha sido creada exitosamente  | X X X ");
+                                    for (Actividad a : cursos.get(indiceCurso).getActividades()) {
+                                        a.setCriterio(criterio);
+                                    }
+
+                                }
+
+                                case 2 -> {
+                                    teclado.nextLine();
+                                    System.out.print("\n    - - - Registrar notas- - -");
+                                    System.out.print("\n    elija la actividad a calificar :");
+                                    int i = 1;
+                                    for (Actividad act : cursos.get(indiceCurso).getActividades()) {
+                                        System.out.print("\n        "+i + ")" + act.getNombreActividad());
+                                        i++;
+                                    }
+                                    System.out.print("\n    ingrese una opcion: ");
+                                    int indiceActividad = teclado.nextInt();
+                                    indiceActividad=indiceActividad-1;
+
+                                    System.out.print("\n    ingrese el ID del estudiante a calificar  :");
+                                    int id = teclado.nextInt();
+                                    boolean verificarEstudiante = false;
+                                    int indiceEstudiante = -1;
+                                    for (Estudiante alumno : cursos.get(indiceCurso).getEstudiantes()) {
+                                        if (alumno.getId() == id) {
+                                            verificarEstudiante = true;
+                                            indiceEstudiante = cursos.get(indiceCurso).getEstudiantes().indexOf(alumno);
+                                        }
+                                    }
+                                    if (verificarEstudiante == false) {
+                                        System.out.println("    * * * * | El estudiante no se encuentra | * * * * ");
+                                    } else {
+                                        System.out.println("ingrese la calificacion entre el 0 y el 5 : ");
+                                        double nota = teclado.nextDouble();
+                                        if (nota >= 0 && nota <= 5) {
+                                            cursos.get(indiceCurso).registrarNotaEstudiante(indiceEstudiante, indiceActividad, nota);
+                                            System.out.println("    X X X | Se ha registrado la nota exitosamente  | X X X ");
+                                        } else {
+                                            System.out.println("    * * * * | Ingrese un valor valido  | * * * * ");
+                                        }
+                                    }
+                                }
+                                case 3 ->{
+                                        int anchoCol = 25;
+
+                                        System.out.printf("%-" + 15 + "s", "NOMBRE");
+                                        System.out.printf("%-" + 10 + "s", "ID");
+                                        for (Actividad e : cursos.get(indiceCurso).getActividades()) {
+                                            System.out.printf("%-" + anchoCol + "s", e.getNombreActividad());
+                                        }
+                                        System.out.printf("%-" + 15 + "s", "Definitiva");
+                                        System.out.println();
+
+                                        for (Estudiante estudiante : cursos.get(indiceCurso).getEstudiantes()) {
+                                            System.out.printf("%-" + 15 + "s", estudiante.getNombre());
+                                            System.out.printf("%-" + 10 + "s", estudiante.getId());
+                                            int i = 0;
+                                            for (Actividad e : cursos.get(indiceCurso).getActividades()) {
+                                                System.out.printf("%-" + anchoCol + "s", estudiante.getActividades().get(i).getNota());
+                                                i++;
+                                            }
+                                            System.out.printf("%-" + anchoCol + "s", estudiante.getDefinitiva());
+                                            System.out.println();
+                                        }
+                                }
+                                case 4->{
+                                    estadoGestion=false;
+                                }
+                                default ->  System.out.println("    * * * * | Ingrese un valor valido  | * * * * ");
+                            }
+                        }while (estadoGestion);
                     }else{
                         System.out.println("    * * * * | El curso no se encuentra | * * * * ");
                     }
-                /*
-                System.out.println("    2) Ver notas .");
-                System.out.println("    3) Volver al Menú.");
-                System.out.print("    Dígite la opción que desea elegir: ");
-                int opcGN=teclado.nextInt();
-                if(opcGN==1){
-                    System.out.println("ingrese el NRC del curso ");
-                    int cursoAE = teclado.nextInt();
-                    Boolean verificarCurso = false;
-                    int indiceCurso = -1;
-                    for (Cursos e : cursos) {
-                        if (cursoAE == e.getNrc()) {
-                            verificarCurso = true;
-                            indiceCurso = cursos.indexOf(e);
-                        }
-                    }
-                    if (verificarCurso == true) {
-                        System.out.println("ingrese el ID del estudiante ");
-                        int id  = teclado.nextInt();
-                        boolean verificarEstudiante = false;
-                        int indiceEstudiante=-1;
-                        for(Estudiante alumno: estudiantes){
-                            if (alumno.getId() == id) {
-                                verificarEstudiante = true;
-                                indiceEstudiante=estudiantes.indexOf(alumno);
-                            }
-                        }
-                        if(verificarEstudiante==false){
-                            System.out.println("    * * * * | El estudiante no se encuentra | * * * * ");
-                        }else{
-                            System.out.print("\nIngrese el nombre de la actividad :");
-                            String actividadN=teclado.nextLine();
-                            System.out.println("Ingrese el porcentaje de la actividad :");
-                            double porcentaje =teclado.nextDouble();
-                            System.out.println("Elija el criterio de evaluacion :" +
-                                    "\n      1) Talleres / Tareas -> 20% " +
-                                    "\n      2) Quizzes -> 30%" +
-                                    "\n      3) Parcial -> 50%");
-                            int criterio =teclado.nextInt();
-                            if(criterio==1 ){
 
-                            }
-                        }
 
-                    } else {
-                        System.out.println("    * * * * | El curso no se encuentra | * * * * ");
-                    }
-                }*/
-                }while(estadoGestion);
 
             }
 

@@ -1,9 +1,19 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Estudiante {
     private String nombre;
     private int id;
     private String carrera;
+    private List<Actividad> actividades = new ArrayList<>();
+
+    public List<Actividad> getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(List<Actividad> actividades) {
+        this.actividades = actividades;
+    }
 
     public Estudiante(String nombre, int id, String carrera) {
 
@@ -62,4 +72,37 @@ public class Estudiante {
                 "\n    ID: " + id +
                 "\n    Carrera: " + carrera;
     }
-}
+
+    public void agregarActividad(String nombre ,int  criterio,double porcentajeTrabajos,double porcentajeQuizzes,double porcentajeParcial){
+        actividades.add(new Actividad(nombre,criterio,porcentajeTrabajos,porcentajeQuizzes,porcentajeParcial));
+        System.out.println();
+    }
+    public double getDefinitiva(){
+        double definitiva = 0;
+        double notat=0;
+        double notaq=0;
+        double notap=0;
+        double pt=0,pq = 0,pp=0;
+
+        for (Actividad actividad:actividades){
+
+            if(actividad.getCriterio() == 1){
+                notat+=actividad.getNota();
+                pt=actividad.getCriterio();
+                System.out.println(pt);
+            } else if( actividad.getCriterio() == 2){
+                notaq+=actividad.getNota();
+                pq=actividad.getCriterio();
+                System.out.println(pq);
+            } else if ( actividad.getCriterio() == 3){
+                notap+=actividad.getNota();
+                pp=actividad.getCriterio();
+                System.out.println(pp);
+            }
+        }
+        definitiva=(notat*pt)+(notaq*pq)+(notap*pp);
+            return definitiva;
+        }
+
+    }
+
